@@ -14,12 +14,15 @@ export default function Photo({
   alt,
   sizes,
   priority,
+  quality = 82,
   className,
 }: {
   src: string;
   alt: string;
   sizes?: string;
   priority?: boolean;
+  /** JPEG quality next/image encodes at (1–100). */
+  quality?: number;
   className?: string;
 }) {
   const [failed, setFailed] = useState(false);
@@ -31,6 +34,7 @@ export default function Photo({
       alt={alt}
       fill
       priority={priority}
+      quality={quality}
       sizes={sizes}
       onError={() => setFailed(true)}
       className={cn("transition-opacity duration-500", className)}

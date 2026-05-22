@@ -34,20 +34,22 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-dark2 to-base" />
         {/*
           HERO BANNER — uses /public/dubai-night.jpg (the night-city shot).
-          It's a portrait photo, so the gradients below fade its edges
-          into the black background for a true full-width banner.
+          The source is a phone photo, so a slight blur + the site's grain
+          turn it into an intentional cinematic backdrop rather than a
+          stretched low-res image. Swap in a higher-res file to sharpen it.
         */}
         <Photo
           src="/dubai-night.jpg"
           alt=""
           priority
+          quality={92}
           sizes="100vw"
-          className="object-cover object-center"
+          className="scale-110 object-cover object-center blur-[2.5px] brightness-[0.92] contrast-[1.1] saturate-[1.05]"
         />
         {/* Blend layers — left dark for text, top/bottom fade to black */}
-        <div className="absolute inset-0 bg-gradient-to-r from-base via-base/75 to-base/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-base via-base/25 to-base/55" />
-        <div className="absolute inset-0 bg-base/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-base via-base/80 to-base/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-base via-base/30 to-base/55" />
+        <div className="absolute inset-0 bg-base/25" />
       </div>
 
       {/* Soft accent glow for depth */}
