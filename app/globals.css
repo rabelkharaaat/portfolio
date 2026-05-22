@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────
+   Base styles
+   ─────────────────────────────────────────── */
+:root {
+  --accent: #d4a574;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #fafafa;
+  overflow-x: hidden;
+}
+
+/* Hide native cursor on devices that support a custom one */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none;
+  }
+}
+
+/* ───────────────────────────────────────────
+   Selection
+   ─────────────────────────────────────────── */
+::selection {
+  background-color: #d4a574;
+  color: #0a0a0a;
+}
+
+/* ───────────────────────────────────────────
+   Lenis smooth scroll
+   ─────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ───────────────────────────────────────────
+   Scrollbar
+   ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* ───────────────────────────────────────────
+   Utility helpers
+   ─────────────────────────────────────────── */
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-container px-6 sm:px-8 lg:px-12;
+  }
+  .section-label {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-muted;
+  }
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+/* Film-grain noise overlay sits above everything, ignores pointer events */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
