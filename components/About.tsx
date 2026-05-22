@@ -28,63 +28,59 @@ export default function About() {
           </div>
         </Reveal>
 
-        {/* Two-column layout */}
+        {/* Portrait + story side by side */}
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left: big statement */}
-          <div className="lg:col-span-7">
-            <h2 className="font-serif text-[2.5rem] leading-[1.1] text-primary sm:text-5xl lg:text-[3.5rem]">
-              <RevealText
-                text="I build websites, stores, and creative work for businesses that want"
-              />{" "}
+          {/* Left: portrait photo */}
+          <Reveal className="lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line">
+              {/* Fallback backdrop if the photo is missing */}
+              <div className="absolute inset-0 bg-gradient-to-br from-surface via-dark2 to-base" />
+              {/*
+                PORTRAIT — uses /public/hero-portrait.jpg (the black-tee shot).
+                Graded dark + slight desaturation to match the site.
+              */}
+              <Photo
+                src="/hero-portrait.jpg"
+                alt="Mohamed Afkir"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-center contrast-[1.08] grayscale-[0.15]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-base/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-accent/[0.05] mix-blend-overlay" />
+
+              {/* Caption tag */}
+              <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-secondary">
+                  Mohamed Afkir · Tangier
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Right: statement + paragraphs */}
+          <div className="flex flex-col lg:col-span-7">
+            <h2 className="font-serif text-[2.25rem] leading-[1.12] text-primary sm:text-[2.75rem] lg:text-5xl">
+              <RevealText text="I build websites, stores, and creative work for businesses that want" />{" "}
               <span className="italic text-accent">
                 <RevealText text="more than a template." delay={0.3} />
               </span>
             </h2>
-          </div>
 
-          {/* Right: paragraphs */}
-          <div className="flex flex-col gap-6 lg:col-span-5 lg:pt-3">
-            {PARAGRAPHS.map((p, i) => (
-              <Reveal key={i} delay={i * 0.1}>
-                <p className="text-sm leading-relaxed text-secondary sm:text-base">
-                  {p}
-                </p>
-              </Reveal>
-            ))}
+            <div className="mt-9 flex flex-col gap-6">
+              {PARAGRAPHS.map((p, i) => (
+                <Reveal key={i} delay={i * 0.1}>
+                  <p className="max-w-xl text-sm leading-relaxed text-secondary sm:text-base">
+                    {p}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Cinematic city strip — the Tangier → Dubai narrative */}
-        <Reveal className="mt-20">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-xl border border-line">
-            <div className="absolute inset-0 bg-gradient-to-br from-dark2 to-base" />
-            {/*
-              ATMOSPHERE IMAGE — drop your night-city photo at
-              /public/dubai-night.jpg (the skyline-at-night shot).
-            */}
-            <Photo
-              src="/dubai-night.jpg"
-              alt="City skyline at night"
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-base via-base/30 to-transparent" />
-            <div className="absolute inset-0 bg-accent/[0.05] mix-blend-overlay" />
-
-            {/* Caption */}
-            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between sm:bottom-7 sm:left-8 sm:right-8">
-              <p className="font-serif text-xl italic text-primary sm:text-3xl">
-                Built in Tangier. Aimed at Dubai.
-              </p>
-              <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-secondary sm:block">
-                Relocating · July 2026
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
         {/* Stats row */}
-        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <div className="h-full bg-surface p-6 sm:p-8">

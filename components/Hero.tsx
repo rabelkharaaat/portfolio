@@ -27,141 +27,125 @@ const DISC_TEXT = "★ AVAILABLE FOR PROJECTS · JULY 2026 · DUBAI ";
 
 export default function Hero() {
   return (
-    <section
-      id="top"
-      className="relative min-h-svh overflow-hidden pt-[72px]"
-    >
-      {/* Atmospheric depth — soft accent glow */}
+    <section id="top" className="relative min-h-svh overflow-hidden">
+      {/* ── Banner image (portrait photo, blended into black) ── */}
+      <div className="absolute inset-0">
+        {/* Fallback backdrop if the photo is missing */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dark2 to-base" />
+        {/*
+          HERO BANNER — uses /public/dubai-night.jpg (the night-city shot).
+          It's a portrait photo, so the gradients below fade its edges
+          into the black background for a true full-width banner.
+        */}
+        <Photo
+          src="/dubai-night.jpg"
+          alt=""
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Blend layers — left dark for text, top/bottom fade to black */}
+        <div className="absolute inset-0 bg-gradient-to-r from-base via-base/75 to-base/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-base via-base/25 to-base/55" />
+        <div className="absolute inset-0 bg-base/20" />
+      </div>
+
+      {/* Soft accent glow for depth */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-40 top-1/4 h-[36rem] w-[36rem] rounded-full bg-accent/[0.07] blur-[120px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-white/[0.02] blur-[100px]"
+        className="pointer-events-none absolute -left-32 top-1/3 h-[28rem] w-[28rem] rounded-full bg-accent/[0.06] blur-[120px]"
       />
 
-      <div className="container-px relative grid w-full grid-cols-1 items-center gap-14 py-14 sm:py-16 lg:grid-cols-12 lg:gap-10 lg:py-20">
-        {/* ── Left: copy ── */}
-        <div className="lg:col-span-7">
-          <motion.p
-            {...rise(0.3)}
-            className="font-mono text-xs uppercase tracking-[0.28em] text-accent"
-          >
-            Designer · Developer · Builder
-          </motion.p>
-
-          <h1 className="mt-6 font-serif text-display tracking-[-0.02em] text-primary">
-            <motion.span {...rise(0.42)} className="block">
-              Crafting digital
-            </motion.span>
-            <motion.span {...rise(0.54)} className="block">
-              experiences for
-            </motion.span>
-            <motion.span {...rise(0.66)} className="block italic text-accent">
-              businesses ready
-            </motion.span>
-            <motion.span {...rise(0.78)} className="block">
-              to scale.
-            </motion.span>
-          </h1>
-
-          <motion.p
-            {...rise(0.92)}
-            className="mt-8 max-w-md text-base leading-relaxed text-secondary sm:text-lg"
-          >
-            Web design, ecommerce, and AI-powered marketing for Dubai&apos;s
-            most ambitious SMBs.
-          </motion.p>
-
-          <motion.div {...rise(1.04)} className="mt-10 flex flex-wrap items-center gap-4">
-            <Magnetic strength={0.4}>
-              <button
-                onClick={() => scrollTo("#work")}
-                className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-base transition-colors"
-              >
-                View Work
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
-            </Magnetic>
-            <Magnetic strength={0.3}>
-              <button
-                onClick={() => scrollTo("#contact")}
-                className="inline-flex items-center gap-3 rounded-full border border-line px-7 py-3.5 text-sm font-medium text-primary transition-colors hover:border-accent hover:text-accent"
-              >
-                Get In Touch
-              </button>
-            </Magnetic>
-          </motion.div>
-        </div>
-
-        {/* ── Right: portrait + rotating availability badge ── */}
-        <motion.div
-          {...rise(0.6)}
-          className="relative mx-auto w-full max-w-[340px] lg:col-span-5 lg:mx-0 lg:ml-auto lg:max-w-none"
+      {/* ── Content — anchored lower-left, over the image ── */}
+      <div className="container-px relative z-10 flex min-h-svh flex-col justify-end pb-28 pt-[120px] sm:pb-32">
+        <motion.p
+          {...rise(0.3)}
+          className="font-mono text-xs uppercase tracking-[0.28em] text-accent"
         >
-          {/* Portrait frame */}
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line">
-            {/* Fallback backdrop — shows if the photo is missing */}
-            <div className="absolute inset-0 bg-gradient-to-br from-surface via-dark2 to-base" />
-            {/*
-              HERO PORTRAIT — drop your photo at /public/hero-portrait.jpg
-              (the black-tee mirror shot). Treated dark + grain to match.
-            */}
-            <Photo
-              src="/hero-portrait.jpg"
-              alt="Mohamed Afkir"
-              priority
-              sizes="(max-width: 1024px) 340px, 40vw"
-              className="object-cover object-center contrast-[1.08] grayscale-[0.15]"
-            />
-            {/* Cinematic gradient grade */}
-            <div className="absolute inset-0 bg-gradient-to-t from-base via-base/20 to-transparent" />
-            <div className="absolute inset-0 bg-accent/[0.06] mix-blend-overlay" />
+          Designer · Developer · Builder
+        </motion.p>
 
-            {/* Caption tag */}
-            <div className="absolute bottom-4 left-4 flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-secondary">
-                Tangier, MA
+        <h1 className="mt-6 font-serif text-display tracking-[-0.02em] text-primary [text-shadow:0_2px_30px_rgba(0,0,0,0.6)]">
+          <motion.span {...rise(0.42)} className="block">
+            Crafting digital
+          </motion.span>
+          <motion.span {...rise(0.54)} className="block">
+            experiences for
+          </motion.span>
+          <motion.span {...rise(0.66)} className="block italic text-accent">
+            businesses ready
+          </motion.span>
+          <motion.span {...rise(0.78)} className="block">
+            to scale.
+          </motion.span>
+        </h1>
+
+        <motion.p
+          {...rise(0.92)}
+          className="mt-8 max-w-md text-base leading-relaxed text-secondary sm:text-lg"
+        >
+          Web design, ecommerce, and AI-powered marketing for Dubai&apos;s
+          most ambitious SMBs.
+        </motion.p>
+
+        <motion.div
+          {...rise(1.04)}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <Magnetic strength={0.4}>
+            <button
+              onClick={() => scrollTo("#work")}
+              className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-base transition-colors"
+            >
+              View Work
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
               </span>
-            </div>
-          </div>
-
-          {/* Rotating availability badge — overlaps the frame corner */}
-          <div className="absolute -bottom-7 -left-7 h-28 w-28 sm:-left-9 sm:-bottom-9 sm:h-32 sm:w-32">
-            <div className="relative h-full w-full rounded-full border border-line bg-base/90 backdrop-blur-sm">
-              <svg
-                viewBox="0 0 200 200"
-                className="absolute inset-0 h-full w-full animate-spin-slow"
-                aria-hidden
-              >
-                <defs>
-                  <path
-                    id="disc-circle"
-                    d="M 100,100 m -66,0 a 66,66 0 1,1 132,0 a 66,66 0 1,1 -132,0"
-                  />
-                </defs>
-                <text className="fill-secondary font-mono text-[11px] uppercase tracking-[0.18em]">
-                  <textPath href="#disc-circle">{DISC_TEXT}</textPath>
-                </text>
-              </svg>
-              {/* Center mark */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-lg text-accent">✦</span>
-              </div>
-            </div>
-          </div>
+            </button>
+          </Magnetic>
+          <Magnetic strength={0.3}>
+            <button
+              onClick={() => scrollTo("#contact")}
+              className="inline-flex items-center gap-3 rounded-full border border-line bg-base/40 px-7 py-3.5 text-sm font-medium text-primary backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              Get In Touch
+            </button>
+          </Magnetic>
         </motion.div>
       </div>
+
+      {/* ── Rotating availability badge — bottom-right over the image ── */}
+      <motion.div
+        {...rise(0.85)}
+        className="absolute bottom-12 right-8 z-10 hidden h-28 w-28 sm:block lg:right-12 lg:h-32 lg:w-32"
+      >
+        <div className="relative h-full w-full rounded-full border border-line bg-base/70 backdrop-blur-md">
+          <svg
+            viewBox="0 0 200 200"
+            className="absolute inset-0 h-full w-full animate-spin-slow"
+            aria-hidden
+          >
+            <defs>
+              <path
+                id="disc-circle"
+                d="M 100,100 m -66,0 a 66,66 0 1,1 132,0 a 66,66 0 1,1 -132,0"
+              />
+            </defs>
+            <text className="fill-secondary font-mono text-[11px] uppercase tracking-[0.18em]">
+              <textPath href="#disc-circle">{DISC_TEXT}</textPath>
+            </text>
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-lg text-accent">✦</span>
+          </div>
+        </div>
+      </motion.div>
 
       {/* ── Scroll indicator ── */}
       <motion.button
         {...rise(1.2)}
         onClick={() => scrollTo("#work")}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
+        className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
         aria-label="Scroll down"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
